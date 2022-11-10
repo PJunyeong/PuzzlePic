@@ -18,5 +18,11 @@ class PhotoHistoryViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchBarDidTap))
+    }
+    
+    @objc private func searchBarDidTap() {
+        let searchVC = SearchViewController()
+        navigationController?.pushViewController(searchVC, animated: false)
     }
 }

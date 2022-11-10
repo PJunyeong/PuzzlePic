@@ -32,6 +32,7 @@ class SearchViewModel {
         
         models
             .sink { [weak self] items in
+                print("Update!")
                 self?.updateDateSource(items: items)
             }
             .store(in: &cancellables)
@@ -45,7 +46,7 @@ class SearchViewModel {
         var datas = [PhotoRoomModel]()
         for x in 0..<100 {
             let title = "title_\(x)"
-            let data = PhotoRoomModel(title: title, createdUserId: "", createdDate: "", photoTemplate: "", sideCount: 0, photoURLs: [])
+            let data = PhotoRoomModel(title: title, createdUserId: "", password: "", createdDate: "", photoTemplate: "", sideCount: 0, photoURLs: [])
             datas.append(data)
         }
         models.send(datas)

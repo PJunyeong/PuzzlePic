@@ -10,8 +10,12 @@ import Foundation
 struct PhotoRoomModel: Hashable {
     let photoRoomId: String = UUID().uuidString
     var photoRoomThumnailURL: URL?
+    var photoRoomCompletedThumnailURL: URL?
     var title: String
     let createdUserId: String
+    let password: String
+    var isCompleted: Bool = false
+    var linkURL: URL?
     let createdDate: String
     let photoTemplate: String
     let sideCount: Int

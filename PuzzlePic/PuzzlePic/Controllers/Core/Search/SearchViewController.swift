@@ -48,8 +48,10 @@ class SearchViewController: UIViewController {
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         collectionView.delegate = self
-        navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.hidesBackButton = true
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     private func bind() {
@@ -65,6 +67,10 @@ class SearchViewController: UIViewController {
                 resultVC.search(with: query)
             }
             .store(in: &cancellables)
+    }
+    
+    private func cancelButtonDidTap() {
+        searchController.searchBar.resignFirstResponder()
     }
 }
 
@@ -86,13 +92,15 @@ extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
 
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (view.frame.width - 4) / 3
+        let width = (view.frame.width - 3) / 2
         return CGSize(width: width, height: width)
     }
 }
 
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("CollectionViewCell did selected: \(indexPath)")
+        let model = viewModel.models.value[indexPath.row]
+        let vc = PhotoRoomViewController(model: model)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+class NSCacheManager {
+    static let shared = NSCacheManager()
+    private init() {}
+    
+    func get(with url: URL) -> Data? {
+        return nil
+    }
+    
+    func save(with data: Data) {
+        
+    }
+}
