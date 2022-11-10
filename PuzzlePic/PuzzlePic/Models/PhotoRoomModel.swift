@@ -7,12 +7,16 @@
 
 import Foundation
 
-struct PhotoRoomModel {
+struct PhotoRoomModel: Hashable {
     let photoRoomId: String = UUID().uuidString
+    var photoRoomThumnailURL: URL?
     var title: String
-    let createdUserName: String
+    let createdUserId: String
     let createdDate: String
     let photoTemplate: String
     let sideCount: Int
     var photoURLs: [PhotoModel]
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(photoRoomId)
+    }
 }

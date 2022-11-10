@@ -7,9 +7,12 @@
 
 import Foundation
 
-struct PhotoModel {
+struct PhotoModel: Hashable {
     let photoId: String = UUID().uuidString
     let photoURL: URL?
     let row: Int
     let column: Int
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(photoId)
+    }
 }
