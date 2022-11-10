@@ -9,13 +9,15 @@ import UIKit
 import Combine
 import CombineCocoa
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
     private let searchController: UISearchController = {
         let results = SearchResultsViewController()
-        let vc = UISearchController(searchResultsController: results)
+        let vc = UISearchController(searchResultsController: nil)
         vc.searchBar.placeholder = "검색..."
         vc.searchBar.searchBarStyle = .minimal
         vc.definesPresentationContext = true
+        vc.hidesNavigationBarDuringPresentation = false
+        vc.automaticallyShowsCancelButton = false
         return vc
     }()
     private let collectionView: UICollectionView = {
@@ -36,6 +38,11 @@ class SearchViewController: UIViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        searchController.becomeFirstResponder()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
@@ -44,14 +51,13 @@ class SearchViewController: UIViewController {
     private func setUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
-        navigationItem.searchController = searchController
-        searchController.searchBar.delegate = self
+        navigationItem.titleView = searchController.searchBar
         searchController.searchResultsUpdater = self
         collectionView.delegate = self
-        navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.hidesBackButton = true
-        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left")?.withTintColor(.label, renderingMode: .alwaysOriginal), style: .done, target: self, action: nil)
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     private func bind() {
@@ -74,19 +80,9 @@ class SearchViewController: UIViewController {
     }
 }
 
-extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
+extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard
-            let resultVC = searchController.searchResultsController as? SearchResultsViewController,
-            let query = searchBar.text,
-            !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-        searchController.isActive = false
-        viewModel.models.send(resultVC.viewModel.models.value)
-        view.endEditing(true)
+        print("updateSearchResults called")
     }
 }
 

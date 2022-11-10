@@ -33,7 +33,7 @@ class SearchResultsViewController: UIViewController {
     }
     
     private func setUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .orange
         tableView.delegate = self
         viewModel.bind(tableView: tableView)
     }

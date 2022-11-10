@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D2D2A17B291D43C2001EC7F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A17A291D43C2001EC7F9 /* AppDelegate.swift */; };
 		D2D2A17D291D43C2001EC7F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A17C291D43C2001EC7F9 /* SceneDelegate.swift */; };
-		D2D2A17F291D43C2001EC7F9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A17E291D43C2001EC7F9 /* TabBarViewController.swift */; };
 		D2D2A184291D43C3001EC7F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2D2A183291D43C3001EC7F9 /* Assets.xcassets */; };
 		D2D2A187291D43C3001EC7F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D2A185291D43C3001EC7F9 /* LaunchScreen.storyboard */; };
 		D2D2A195291D44B4001EC7F9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A194291D44B4001EC7F9 /* SearchViewController.swift */; };
@@ -47,7 +46,6 @@
 		D2D2A177291D43C2001EC7F9 /* PuzzlePic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuzzlePic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D2A17A291D43C2001EC7F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2D2A17C291D43C2001EC7F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D2D2A17E291D43C2001EC7F9 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		D2D2A183291D43C3001EC7F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2D2A186291D43C3001EC7F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2D2A188291D43C3001EC7F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 		D2D2A192291D4448001EC7F9 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D2D2A17E291D43C2001EC7F9 /* TabBarViewController.swift */,
 				D2D2A1CB291D6E1D001EC7F9 /* Core */,
 				D2D2A1CC291D6E2F001EC7F9 /* Other */,
 			);
@@ -311,7 +308,6 @@
 				D2D2A19C291D451B001EC7F9 /* PhotoHistoryViewController.swift in Sources */,
 				D2D2A1C6291D6B45001EC7F9 /* NetwokringManager.swift in Sources */,
 				D2D2A1AC291D4A5A001EC7F9 /* PhotoRoomModel.swift in Sources */,
-				D2D2A17F291D43C2001EC7F9 /* TabBarViewController.swift in Sources */,
 				D2D2A17B291D43C2001EC7F9 /* AppDelegate.swift in Sources */,
 				D2D2A195291D44B4001EC7F9 /* SearchViewController.swift in Sources */,
 				D2D2A1D2291D6FEE001EC7F9 /* PhotoCollectionViewCell.swift in Sources */,
