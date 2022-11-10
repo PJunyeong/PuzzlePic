@@ -11,6 +11,10 @@ class PhotoHistoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setUI()
+    }
+    
+    private func setUI() {
+        view.backgroundColor = .systemBackground
     }
 }
