@@ -16,5 +16,7 @@ class PhotoHistoryViewController: UIViewController {
     
     private func setUI() {
         view.backgroundColor = .systemBackground
+        navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
