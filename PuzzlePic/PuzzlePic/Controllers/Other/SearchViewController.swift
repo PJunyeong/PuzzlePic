@@ -11,13 +11,12 @@ import CombineCocoa
 
 class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
     private let searchController: UISearchController = {
-        let results = SearchResultsViewController()
         let vc = UISearchController(searchResultsController: nil)
         vc.searchBar.placeholder = "검색..."
         vc.searchBar.searchBarStyle = .minimal
         vc.definesPresentationContext = true
-        vc.hidesNavigationBarDuringPresentation = false
         vc.automaticallyShowsCancelButton = false
+        vc.hidesNavigationBarDuringPresentation = false
         return vc
     }()
     private let collectionView: UICollectionView = {
@@ -36,11 +35,6 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         setUI()
         bind()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        searchController.becomeFirstResponder()
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,18 +62,11 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         searchController
             .searchBar
             .textDidChangePublisher
-            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+            .compactMap({ $0 })
             .sink { [weak self] query in
-                guard
-                    let resultVC = self?.searchController.searchResultsController as? SearchResultsViewController,
-                    !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-                resultVC.search(with: query)
+                self?.viewModel.searchText.send(query)
             }
             .store(in: &cancellables)
-    }
-    
-    private func cancelButtonDidTap() {
-        searchController.searchBar.resignFirstResponder()
     }
 }
 
@@ -98,7 +85,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let model = viewModel.models.value[indexPath.row]
+        let model = viewModel.allPhotoRooms.value[indexPath.row]
         let vc = PhotoRoomViewController(model: model)
         navigationController?.pushViewController(vc, animated: true)
     }

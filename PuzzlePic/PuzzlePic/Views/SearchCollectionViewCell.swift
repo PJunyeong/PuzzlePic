@@ -24,7 +24,6 @@ class SearchCollectionViewCell: UICollectionViewCell {
     }()
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: "person.circle")
         imageView.layer.cornerRadius = 8
         imageView.layer.masksToBounds = true
@@ -40,15 +39,15 @@ class SearchCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.frame = contentView.bounds
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
         imageView.image = nil
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        imageView.frame = contentView.bounds
     }
     
     private func setUI() {

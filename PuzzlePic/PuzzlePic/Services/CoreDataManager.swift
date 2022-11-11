@@ -21,7 +21,7 @@ class CoreDataManager {
             if let error = error {
                 print(error.localizedDescription)
             }
-            self?.fetchPhotoRoomEntities()
+            self?.fetchData()
         }
     }
     
@@ -39,7 +39,7 @@ class CoreDataManager {
         }
     }
     
-    private func fetchPhotoRoomEntities() {
+    private func fetchData() {
         let request = NSFetchRequest<PhotoRoomEntity>(entityName: photoRoomEntityName)
         do {
             let data = try container.viewContext.fetch(request)
@@ -59,11 +59,13 @@ class CoreDataManager {
         entity.title = photoRoomModel.title
         entity.photoTemplate = photoRoomModel.photoTemplate
         entity.sideCount = Int64(photoRoomModel.sideCount)
+        entity.joinedUserIds = photoRoomModel.joinedUserIds
         entity.photoModels = photoRoomModel.photoModels.compactMap({ model -> PhotoEntity in
             let entity = PhotoEntity(context: container.viewContext)
             entity.photoId = model.photoId
             entity.column = Int64(model.column)
             entity.row = Int64(model.row)
+            entity.createdUserId = model.createdUserId
             if let photoURLString = model.photoURL?.absoluteString {
                 entity.photoURLString = photoURLString
             }
@@ -90,11 +92,13 @@ class CoreDataManager {
         entity.createdDate = photoRoomModel.createdDate
         entity.photoTemplate = photoRoomModel.photoTemplate
         entity.sideCount = Int64(photoRoomModel.sideCount)
+        entity.joinedUserIds = photoRoomModel.joinedUserIds
         entity.photoModels = photoRoomModel.photoModels.compactMap({ model -> PhotoEntity in
             let entity = PhotoEntity(context: container.viewContext)
             entity.photoId = model.photoId
             entity.column = Int64(model.column)
             entity.row = Int64(model.row)
+            entity.createdUserId = model.createdUserId
             if let photoURLString = model.photoURL?.absoluteString {
                 entity.photoURLString = photoURLString
             }

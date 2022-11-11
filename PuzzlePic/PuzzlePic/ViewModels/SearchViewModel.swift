@@ -10,7 +10,9 @@ import Combine
 import UIKit
 
 class SearchViewModel {
-    let models: CurrentValueSubject<[PhotoRoomModel], Never> = .init([])
+    let allPhotoRooms: CurrentValueSubject<[PhotoRoomModel], Never> = .init([])
+    let searchText: CurrentValueSubject<String, Never> = .init("")
+    private let dataService = FirestoreManager.shared
     private var dataSource: UICollectionViewDiffableDataSource<SearchCollectionViewSection, PhotoRoomModel>!
     private var cancellables = Set<AnyCancellable>()
     
@@ -25,30 +27,49 @@ class SearchViewModel {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { [weak self] collectionView, indexPath, itemIdentifier in
             guard
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.identifier, for: indexPath) as? SearchCollectionViewCell,
-                let model = self?.models.value[indexPath.row] else { return nil }
+                let model = self?.allPhotoRooms.value[indexPath.row] else { return nil }
             cell.configure(with: model)
             return cell
         })
-        
-        models
+        allPhotoRooms
             .sink { [weak self] items in
-                print("Update!")
                 self?.updateDateSource(items: items)
             }
             .store(in: &cancellables)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.addMockData()
-        }
+        searchText
+            .combineLatest(dataService.allPhotoRooms)
+            .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
+            .map(filterAndSortRooms)
+            .sink { [weak self] rooms in
+                self?.allPhotoRooms.send(rooms)
+            }
+            .store(in: &cancellables)
     }
     
+    private func filterAndSortRooms(query: String, rooms: [PhotoRoomModel]) -> [PhotoRoomModel] {
+        let filteredRooms = filterRooms(query: query, rooms: rooms)
+        return sortRooms(rooms: filteredRooms)
+    }
+    
+    private func filterRooms(query: String, rooms: [PhotoRoomModel]) -> [PhotoRoomModel] {
+        guard !query.isEmpty else { return rooms }
+        let lowerCasedQuery = query.lowercased()
+        return rooms.filter({ $0.title.lowercased().contains(lowerCasedQuery) && !$0.isCompleted })
+    }
+    
+    private func sortRooms(rooms: [PhotoRoomModel]) -> [PhotoRoomModel] {
+        return rooms.sorted { first, second in
+            return first.title < second.title
+        }
+    }
+
     private func addMockData() {
         var datas = [PhotoRoomModel]()
-        for x in 0..<100 {
+        let userId = UserDefaultsManager.userId
+        for x in 0..<10 {
             let title = "title_\(x)"
-            let data = PhotoRoomModel(title: title, createdUserId: "", password: "", createdDate: "", photoTemplate: "", sideCount: 0, photoModels: [])
-            datas.append(data)
+            let data = PhotoRoomModel(title: title, createdUserId: userId, password: "", createdDate: "", photoTemplate: "", sideCount: 0, photoModels: [], joinedUserIds: [userId])
+            dataService.set(photoRoomModel: data)
         }
-        models.send(datas)
     }
 }
