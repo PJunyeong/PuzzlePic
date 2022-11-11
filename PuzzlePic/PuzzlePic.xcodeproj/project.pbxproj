@@ -45,6 +45,7 @@
 		D2D2A1EF291E723E001EC7F9 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1EE291E723E001EC7F9 /* DateFormatter+Extensions.swift */; };
 		D2D2A1F1291E72D7001EC7F9 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1F0291E72D7001EC7F9 /* String+Extensions.swift */; };
 		D2D2A1F3291E72E0001EC7F9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1F2291E72E0001EC7F9 /* Date+Extensions.swift */; };
+		D2D2A1F5291E9898001EC7F9 /* PhotoHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1F4291E9898001EC7F9 /* PhotoHistoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		D2D2A1EE291E723E001EC7F9 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		D2D2A1F0291E72D7001EC7F9 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		D2D2A1F2291E72E0001EC7F9 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		D2D2A1F4291E9898001EC7F9 /* PhotoHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHistoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 			children = (
 				D2D2A1BB291D5144001EC7F9 /* SearchViewModel.swift */,
 				D2D2A1C3291D67FB001EC7F9 /* PhotoViewModel.swift */,
+				D2D2A1F4291E9898001EC7F9 /* PhotoHistoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				D2D2A1B0291D4B81001EC7F9 /* FirestoreManager.swift in Sources */,
 				D2D2A1BC291D5144001EC7F9 /* SearchViewModel.swift in Sources */,
 				D2D2A1B2291D4B86001EC7F9 /* NSCacheManager.swift in Sources */,
+				D2D2A1F5291E9898001EC7F9 /* PhotoHistoryViewModel.swift in Sources */,
 				D2D2A1B6291D4BB7001EC7F9 /* LocalFileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -494,8 +498,8 @@
 				INFOPLIST_FILE = PuzzlePic/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -524,8 +528,8 @@
 				INFOPLIST_FILE = PuzzlePic/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -7,23 +7,30 @@
 
 import UIKit
 
-class SettingViewController: UIViewController {
+class SettingViewController: UIViewController, UIGestureRecognizerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUI()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setUI() {
+        view.backgroundColor = .systemBackground
+        setNavigationBar()
     }
-    */
-
+    
+    private func setNavigationBar() {
+        let backButton = UIButton(type: .custom)
+        backButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        backButton.addTarget(self, action: #selector(popToView), for: .touchUpInside)
+        let backBarButton = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButton
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    @objc private func popToView() {
+        navigationController?.popViewController(animated: true)
+    }
 }

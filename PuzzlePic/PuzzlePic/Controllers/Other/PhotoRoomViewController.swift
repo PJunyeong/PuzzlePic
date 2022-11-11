@@ -32,7 +32,12 @@ class PhotoRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func setNavigationBar() {
-        let rightButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .done, target: self, action: #selector(dismissToSearchView))
+        let cancelButton = UIButton(type: .custom)
+        cancelButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        cancelButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        cancelButton.addTarget(self, action: #selector(dismissToSearchView), for: .touchUpInside)
+        let cancelBarButton = UIBarButtonItem(customView: cancelButton)
+        let rightButtonItem = cancelBarButton
         navigationItem.rightBarButtonItem = rightButtonItem
     }
     

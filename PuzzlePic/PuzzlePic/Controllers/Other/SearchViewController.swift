@@ -67,7 +67,12 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func setNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(popToView))
+        let backButton = UIButton(type: .custom)
+        backButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        backButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        backButton.addTarget(self, action: #selector(popToView), for: .touchUpInside)
+        let backBarButton = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButton
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }

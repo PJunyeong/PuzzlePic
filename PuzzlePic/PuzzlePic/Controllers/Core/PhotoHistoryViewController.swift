@@ -6,8 +6,18 @@
 //
 
 import UIKit
+import Combine
 
 class PhotoHistoryViewController: UIViewController {
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 1
+        layout.minimumInteritemSpacing = 1
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(PhotoHistoryCollectionViewCell.self, forCellWithReuseIdentifier: PhotoHistoryCollectionViewCell.identifier)
+        return collectionView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,10 +26,23 @@ class PhotoHistoryViewController: UIViewController {
     
     private func setUI() {
         view.backgroundColor = .systemBackground
-        title = "Photo History"
-        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: self, action: #selector(searchButtonDidTap))
-        let settingButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(settingButtonDidTap))
-        navigationItem.rightBarButtonItems = [settingButton, searchButton]
+        view.addSubview(collectionView)
+        collectionView.delegate = self
+        setNavigationBar()
+    }
+    
+    private func setNavigationBar() {
+        let searchButton = UIButton(type: .custom)
+        searchButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        searchButton.addTarget(self, action: #selector(searchButtonDidTap), for: .touchUpInside)
+        let searchBarButton = UIBarButtonItem(customView: searchButton)
+        let settingButton = UIButton(type: .custom)
+        settingButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        settingButton.setImage(UIImage(systemName: "gear"), for: .normal)
+        settingButton.addTarget(self, action: #selector(settingButtonDidTap), for: .touchUpInside)
+        let settingBarButton = UIBarButtonItem(customView: settingButton)
+        navigationItem.setRightBarButtonItems([settingBarButton, searchBarButton], animated: false)
     }
     
     @objc private func searchButtonDidTap() {
@@ -30,5 +53,15 @@ class PhotoHistoryViewController: UIViewController {
     @objc private func settingButtonDidTap() {
         let settingVC = SettingViewController()
         navigationController?.pushViewController(settingVC, animated: true)
+    }
+}
+
+extension PhotoHistoryViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+        return nil
     }
 }
