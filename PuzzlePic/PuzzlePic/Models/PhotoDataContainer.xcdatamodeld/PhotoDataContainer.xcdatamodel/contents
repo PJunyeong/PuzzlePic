@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A380" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PhotoEntity" representedClassName="PhotoEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="column" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="photoId" optional="YES" attributeType="String"/>
+        <attribute name="photoURLString" optional="YES" attributeType="String"/>
+        <attribute name="row" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="PhotoRoomEntity" representedClassName="PhotoRoomEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="createdDate" optional="YES" attributeType="String"/>
+        <attribute name="createdUserId" optional="YES" attributeType="String"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="linkURLString" optional="YES" attributeType="String"/>
+        <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="photoModels" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[PhotoEntity]"/>
+        <attribute name="photoRoomCompletedThumbnailURL" optional="YES" attributeType="String"/>
+        <attribute name="photoRoomId" optional="YES" attributeType="String"/>
+        <attribute name="photoRoomThumbnailURLString" optional="YES" attributeType="String"/>
+        <attribute name="photoTemplate" optional="YES" attributeType="String"/>
+        <attribute name="sideCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+</model>

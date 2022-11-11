@@ -9,8 +9,8 @@ import Foundation
 
 struct PhotoRoomModel: Hashable {
     let photoRoomId: String = UUID().uuidString
-    var photoRoomThumnailURL: URL?
-    var photoRoomCompletedThumnailURL: URL?
+    var photoRoomThumbnailURL: URL?
+    var photoRoomCompletedThumbnailURL: URL?
     var title: String
     let createdUserId: String
     let password: String
@@ -19,7 +19,7 @@ struct PhotoRoomModel: Hashable {
     let createdDate: String
     let photoTemplate: String
     let sideCount: Int
-    var photoURLs: [PhotoModel]
+    var photoModels: [PhotoModel]
     func hash(into hasher: inout Hasher) {
         hasher.combine(photoRoomId)
     }

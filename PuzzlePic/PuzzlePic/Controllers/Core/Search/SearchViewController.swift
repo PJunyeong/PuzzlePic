@@ -54,10 +54,13 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         navigationItem.titleView = searchController.searchBar
         searchController.searchResultsUpdater = self
         collectionView.delegate = self
-        navigationItem.hidesBackButton = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left")?.withTintColor(.label, renderingMode: .alwaysOriginal), style: .done, target: self, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(popToView))
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    @objc private func popToView() {
+        navigationController?.popViewController(animated: true)
     }
     
     private func bind() {

@@ -46,7 +46,7 @@ class SearchViewModel {
         var datas = [PhotoRoomModel]()
         for x in 0..<100 {
             let title = "title_\(x)"
-            let data = PhotoRoomModel(title: title, createdUserId: "", password: "", createdDate: "", photoTemplate: "", sideCount: 0, photoURLs: [])
+            let data = PhotoRoomModel(title: title, createdUserId: "", password: "", createdDate: "", photoTemplate: "", sideCount: 0, photoModels: [])
             datas.append(data)
         }
         models.send(datas)

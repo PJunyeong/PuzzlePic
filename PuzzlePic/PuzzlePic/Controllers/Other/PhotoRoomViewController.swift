@@ -29,7 +29,7 @@ class PhotoRoomViewController: UIViewController {
     private func setUI() {
         view.backgroundColor = .systemBackground
         title = viewModel.model.title
-        navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .never
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
 }

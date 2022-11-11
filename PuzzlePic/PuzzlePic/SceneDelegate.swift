@@ -14,6 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.theme.accent]
         let window = UIWindow(windowScene: scene)
         window.makeKeyAndVisible()
         window.rootViewController = UINavigationController(rootViewController: PhotoHistoryViewController())

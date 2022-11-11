@@ -6,16 +6,29 @@
 //
 
 import Foundation
+import UIKit
 
 class NSCacheManager {
     static let shared = NSCacheManager()
     private init() {}
     
-    func get(with url: URL) -> Data? {
-        return nil
+    private var imageCache: NSCache<NSString, UIImage> = {
+        let cache = NSCache<NSString, UIImage>()
+        cache.countLimit = 100
+        cache.totalCostLimit = 1024 * 1024 * 1024
+        return cache
+    }()
+    
+    func get(name: String) -> UIImage? {
+        guard let image = imageCache.object(forKey: name as NSString) else { return nil }
+        return image
     }
     
-    func save(with data: Data) {
-        
+    func save(image: UIImage, name: String) {
+        imageCache.setObject(image, forKey: name as NSString)
+    }
+    
+    func remove(with name: String) {
+        imageCache.removeObject(forKey: name as NSString)
     }
 }
