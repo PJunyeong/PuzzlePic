@@ -14,7 +14,7 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         let vc = UISearchController(searchResultsController: nil)
         vc.searchBar.placeholder = "검색..."
         vc.searchBar.searchBarStyle = .minimal
-        vc.definesPresentationContext = true
+//        vc.definesPresentationContext = true
         vc.automaticallyShowsCancelButton = false
         vc.hidesNavigationBarDuringPresentation = false
         return vc
@@ -61,6 +61,7 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         navigationItem.titleView = searchController.searchBar
         navigationItem.backBarButtonItem?.title = ""
         searchController.searchResultsUpdater = self
+        definesPresentationContext = true
         collectionView.delegate = self
         setNavigationBar()
     }
@@ -115,7 +116,6 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        print("updateSearchResults called")
     }
 }
 

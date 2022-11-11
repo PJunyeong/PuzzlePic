@@ -16,19 +16,19 @@ class PhotoHistoryViewController: UIViewController {
     
     private func setUI() {
         view.backgroundColor = .systemBackground
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass")?.withTintColor(.label, renderingMode: .alwaysOriginal), style: .done, target: self, action: #selector(searchBarDidTap))
+        title = "Photo History"
+        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: self, action: #selector(searchButtonDidTap))
+        let settingButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(settingButtonDidTap))
+        navigationItem.rightBarButtonItems = [settingButton, searchButton]
     }
     
-    @objc private func searchBarDidTap() {
+    @objc private func searchButtonDidTap() {
         let searchVC = SearchViewController()
         navigationController?.pushViewController(searchVC, animated: false)
     }
     
-    private func setNavigationBar() {
-        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(popToView))
-    }
-    
-    @objc private func popToView() {
-        navigationController?.popViewController(animated: true)
+    @objc private func settingButtonDidTap() {
+        let settingVC = SettingViewController()
+        navigationController?.pushViewController(settingVC, animated: true)
     }
 }
