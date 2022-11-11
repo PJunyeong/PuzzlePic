@@ -16,13 +16,19 @@ class PhotoHistoryViewController: UIViewController {
     
     private func setUI() {
         view.backgroundColor = .systemBackground
-        navigationItem.largeTitleDisplayMode = .always
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass")?.withTintColor(.label, renderingMode: .alwaysOriginal), style: .done, target: self, action: #selector(searchBarDidTap))
     }
     
     @objc private func searchBarDidTap() {
         let searchVC = SearchViewController()
         navigationController?.pushViewController(searchVC, animated: false)
+    }
+    
+    private func setNavigationBar() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(popToView))
+    }
+    
+    @objc private func popToView() {
+        navigationController?.popViewController(animated: true)
     }
 }

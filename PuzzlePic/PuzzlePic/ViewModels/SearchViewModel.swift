@@ -63,13 +63,13 @@ class SearchViewModel {
         }
     }
 
-    private func addMockData() {
-        var datas = [PhotoRoomModel]()
-        let userId = UserDefaultsManager.userId
-        for x in 0..<10 {
-            let title = "title_\(x)"
-            let data = PhotoRoomModel(title: title, createdUserId: userId, password: "", createdDate: "", photoTemplate: "", sideCount: 0, photoModels: [], joinedUserIds: [userId])
-            dataService.set(photoRoomModel: data)
-        }
-    }
+//    private func addMockData() {
+//        var datas = [PhotoRoomModel]()
+//        let userId = UserDefaultsManager.userId
+//        for x in 0..<10 {
+//            let title = "title_\(x)"
+//            let data = PhotoRoomModel(title: title, createdUserId: userId, password: "", createdDate: "", photoTemplate: "", sideCount: 0, photoModels: [], joinedUserIds: [userId])
+//            dataService.set(photoRoomModel: data)
+//        }
+//    }
 }

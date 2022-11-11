@@ -19,6 +19,16 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         vc.hidesNavigationBarDuringPresentation = false
         return vc
     }()
+    private let noSearchResultsView: UILabel = {
+        let label = UILabel()
+        label.text = "이런! 찾으시는 방이 없습니다.\n다른 이름으로 검색해 보세요."
+        label.textAlignment = .center
+        label.textColor = UIColor.theme.accent
+        label.font = .preferredFont(forTextStyle: .title3)
+        label.numberOfLines = 0
+        label.isHidden = true
+        return label
+    }()
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -40,14 +50,22 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
+        noSearchResultsView.frame = view.bounds
+        noSearchResultsView.center = view.center
     }
     
     private func setUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
+        view.addSubview(noSearchResultsView)
         navigationItem.titleView = searchController.searchBar
+        navigationItem.backBarButtonItem?.title = ""
         searchController.searchResultsUpdater = self
         collectionView.delegate = self
+        setNavigationBar()
+    }
+    
+    private func setNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(popToView))
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -57,8 +75,25 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         navigationController?.popViewController(animated: true)
     }
     
+    private func toggleNoSearchResultsView(isHidden: Bool) {
+        let inView = isHidden ? collectionView : noSearchResultsView
+        let outView = isHidden ? noSearchResultsView : collectionView
+        
+        UIView.transition(with: inView, duration: 0.5, options: .transitionCrossDissolve) {
+            inView.isHidden = false
+            outView.isHidden = true
+        }
+    }
+    
     private func bind() {
         viewModel.bind(collectionView: collectionView)
+        viewModel
+            .allPhotoRooms
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] rooms in
+                self?.toggleNoSearchResultsView(isHidden: !rooms.isEmpty)
+            }
+            .store(in: &cancellables)
         searchController
             .searchBar
             .textDidChangePublisher
@@ -67,6 +102,14 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
                 self?.viewModel.searchText.send(query)
             }
             .store(in: &cancellables)
+    }
+    
+    private func presentPhotoRoomView(model: PhotoRoomModel) {
+        let vc = PhotoRoomViewController(model: model)
+        let navVC = UINavigationController(rootViewController: vc)
+        vc.title = model.title
+        navVC.modalPresentationStyle = .fullScreen
+        present(navVC, animated: true)
     }
 }
 
@@ -86,7 +129,6 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = viewModel.allPhotoRooms.value[indexPath.row]
-        let vc = PhotoRoomViewController(model: model)
-        navigationController?.pushViewController(vc, animated: true)
+        presentPhotoRoomView(model: model)
     }
 }

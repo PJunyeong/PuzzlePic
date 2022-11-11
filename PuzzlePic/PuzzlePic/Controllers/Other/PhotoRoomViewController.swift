@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import CombineCocoa
 
-class PhotoRoomViewController: UIViewController {
+class PhotoRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     private let viewModel: PhotoViewModel
 
     init(model: PhotoRoomModel) {
@@ -28,8 +28,15 @@ class PhotoRoomViewController: UIViewController {
     
     private func setUI() {
         view.backgroundColor = .systemBackground
-        title = viewModel.model.title
-        navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.prefersLargeTitles = false
+        setNavigationBar()
+    }
+    
+    private func setNavigationBar() {
+        let rightButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .done, target: self, action: #selector(dismissToSearchView))
+        navigationItem.rightBarButtonItem = rightButtonItem
+    }
+    
+    @objc private func dismissToSearchView() {
+        dismiss(animated: true)
     }
 }
