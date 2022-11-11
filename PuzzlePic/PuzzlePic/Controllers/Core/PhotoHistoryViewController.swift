@@ -18,10 +18,17 @@ class PhotoHistoryViewController: UIViewController {
         collectionView.register(PhotoHistoryCollectionViewCell.self, forCellWithReuseIdentifier: PhotoHistoryCollectionViewCell.identifier)
         return collectionView
     }()
+    private let viewModel = PhotoHistoryViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        bind()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.frame = view.bounds
     }
     
     private func setUI() {
@@ -29,6 +36,10 @@ class PhotoHistoryViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.delegate = self
         setNavigationBar()
+    }
+    
+    private func bind() {
+        viewModel.bind(collectionView: collectionView)
     }
     
     private func setNavigationBar() {

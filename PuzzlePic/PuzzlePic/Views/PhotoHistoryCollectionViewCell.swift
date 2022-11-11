@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum PhotoHistoryCollectionViewSection {
+enum PhotoHistoryCollectionViewSection: CaseIterable {
     case first
     case second
 }
@@ -49,6 +49,11 @@ class PhotoHistoryCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(imageView)        
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        titleLabel.frame = contentView.bounds
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
@@ -58,5 +63,6 @@ class PhotoHistoryCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with model: PhotoRoomModel) {
+        titleLabel.text = model.title
     }
 }
