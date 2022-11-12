@@ -8,13 +8,13 @@
 import UIKit
 import Combine
 import CombineCocoa
+import Lottie
 
 class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
     private let searchController: UISearchController = {
         let vc = UISearchController(searchResultsController: nil)
         vc.searchBar.placeholder = "검색..."
         vc.searchBar.searchBarStyle = .minimal
-//        vc.definesPresentationContext = true
         vc.automaticallyShowsCancelButton = false
         vc.hidesNavigationBarDuringPresentation = false
         return vc
@@ -39,7 +39,10 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         return collectionView
     }()
     private let viewModel = SearchViewModel()
+    private let failAnimationView: LottieAnimationView = .init(name: "Fail_Animation")
+    private let successAnimationView: LottieAnimationView = .init(name: "Success_Animation")
     private var cancellables = Set<AnyCancellable>()
+    private let input: PassthroughSubject<PasswordViewController.Input, Never> = .init()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +55,20 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         collectionView.frame = view.bounds
         noSearchResultsView.frame = view.bounds
         noSearchResultsView.center = view.center
+        successAnimationView.frame = view.bounds
+        successAnimationView.center = view.center
+        failAnimationView.frame = view.bounds
+        failAnimationView.center = view.center
     }
     
     private func setUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
         view.addSubview(noSearchResultsView)
+        view.addSubview(failAnimationView)
+        view.addSubview(successAnimationView)
+        failAnimationView.isHidden = true
+        successAnimationView.isHidden = true
         navigationItem.titleView = searchController.searchBar
         navigationItem.backBarButtonItem?.title = ""
         searchController.searchResultsUpdater = self
@@ -117,10 +128,59 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         navVC.modalPresentationStyle = .fullScreen
         present(navVC, animated: true)
     }
+    
+    private func presentPasswordView(model: PhotoRoomModel) {
+        let vc = PasswordViewController(model: model)
+        vc.delegate = self
+        vc.bind(input: input.eraseToAnyPublisher())
+        let navVC = UINavigationController(rootViewController: vc)
+        vc.title = "이런, 비밀번호를 입력해주세요!"
+        navVC.modalPresentationStyle = .pageSheet
+        if let sheet = navVC.sheetPresentationController {
+            sheet.delegate = self
+            sheet.preferredCornerRadius = 20
+            sheet.prefersGrabberVisible = true
+            sheet.detents = [.custom(resolver: { context in
+                return 100
+            })]
+        }
+        present(navVC, animated: true)
+    }
+}
+
+extension SearchViewController: PasswordViewControllerDelegate {
+    func passwordDidEntered(_ password: String, _ model: PhotoRoomModel) {
+        print("password: \(model.password)")
+        if password == model.password {
+            successAnimationView.isHidden = false
+            successAnimationView.play { [weak self] done in
+                if done {
+                    self?.successAnimationView.isHidden = true
+                    self?.dismiss(animated: true, completion: {
+                        self?.presentPhotoRoomView(model: model)
+                    })
+                }
+            }
+        } else {
+            failAnimationView.isHidden = false
+            failAnimationView.play { [weak self] done in
+                if done {
+                    self?.failAnimationView.isHidden = true
+                    self?.input.send(.passwordDidVerified(isPassed: false))
+                }
+            }
+        }
+    }
 }
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
+    }
+}
+
+extension SearchViewController: UISheetPresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("sheet dismiss")
     }
 }
 
@@ -134,6 +194,6 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = viewModel.allPhotoRooms.value[indexPath.row]
-        presentPhotoRoomView(model: model)
+        presentPasswordView(model: model)
     }
 }

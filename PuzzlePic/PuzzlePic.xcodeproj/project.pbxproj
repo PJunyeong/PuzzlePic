@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20309F9291F7B8E00DF8055 /* Success_Animation.json in Resources */ = {isa = PBXBuildFile; fileRef = D20309F7291F7B8E00DF8055 /* Success_Animation.json */; };
+		D20309FA291F7B8E00DF8055 /* Fail_Animation.json in Resources */ = {isa = PBXBuildFile; fileRef = D20309F8291F7B8E00DF8055 /* Fail_Animation.json */; };
+		D20309FD291F7D9400DF8055 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = D20309FC291F7D9400DF8055 /* FirebaseDynamicLinks */; };
+		D20309FF291F7D9400DF8055 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D20309FE291F7D9400DF8055 /* FirebaseFirestore */; };
+		D2030A01291F7D9400DF8055 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D2030A00291F7D9400DF8055 /* FirebaseStorage */; };
+		D2030A04291F7EF800DF8055 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D2030A03291F7EF800DF8055 /* Lottie */; };
 		D2D2A17B291D43C2001EC7F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A17A291D43C2001EC7F9 /* AppDelegate.swift */; };
 		D2D2A17D291D43C2001EC7F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A17C291D43C2001EC7F9 /* SceneDelegate.swift */; };
 		D2D2A184291D43C3001EC7F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2D2A183291D43C3001EC7F9 /* Assets.xcassets */; };
@@ -14,9 +20,6 @@
 		D2D2A195291D44B4001EC7F9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A194291D44B4001EC7F9 /* SearchViewController.swift */; };
 		D2D2A19A291D44FE001EC7F9 /* PhotoRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A199291D44FE001EC7F9 /* PhotoRoomViewController.swift */; };
 		D2D2A19C291D451B001EC7F9 /* PhotoHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A19B291D451B001EC7F9 /* PhotoHistoryViewController.swift */; };
-		D2D2A19F291D45FC001EC7F9 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = D2D2A19E291D45FC001EC7F9 /* FirebaseDynamicLinks */; };
-		D2D2A1A1291D45FC001EC7F9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D2D2A1A0291D45FC001EC7F9 /* FirebaseFirestore */; };
-		D2D2A1A3291D45FC001EC7F9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D2D2A1A2291D45FC001EC7F9 /* FirebaseStorage */; };
 		D2D2A1A5291D4827001EC7F9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D2D2A1A4291D4827001EC7F9 /* GoogleService-Info.plist */; };
 		D2D2A1A8291D49A8001EC7F9 /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D2D2A1A7291D49A8001EC7F9 /* CombineCocoa */; };
 		D2D2A1AA291D49DC001EC7F9 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1A9291D49DC001EC7F9 /* PhotoModel.swift */; };
@@ -46,9 +49,12 @@
 		D2D2A1F1291E72D7001EC7F9 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1F0291E72D7001EC7F9 /* String+Extensions.swift */; };
 		D2D2A1F3291E72E0001EC7F9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1F2291E72E0001EC7F9 /* Date+Extensions.swift */; };
 		D2D2A1F5291E9898001EC7F9 /* PhotoHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1F4291E9898001EC7F9 /* PhotoHistoryViewModel.swift */; };
+		D2DEF4C3291F6EEC00D6E5B8 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DEF4C2291F6EEC00D6E5B8 /* PasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D20309F7291F7B8E00DF8055 /* Success_Animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Success_Animation.json; sourceTree = "<group>"; };
+		D20309F8291F7B8E00DF8055 /* Fail_Animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Fail_Animation.json; sourceTree = "<group>"; };
 		D2D2A177291D43C2001EC7F9 /* PuzzlePic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuzzlePic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D2A17A291D43C2001EC7F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2D2A17C291D43C2001EC7F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +92,7 @@
 		D2D2A1F0291E72D7001EC7F9 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		D2D2A1F2291E72E0001EC7F9 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		D2D2A1F4291E9898001EC7F9 /* PhotoHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHistoryViewModel.swift; sourceTree = "<group>"; };
+		D2DEF4C2291F6EEC00D6E5B8 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,21 +100,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2D2A19F291D45FC001EC7F9 /* FirebaseDynamicLinks in Frameworks */,
-				D2D2A1A1291D45FC001EC7F9 /* FirebaseFirestore in Frameworks */,
+				D2030A04291F7EF800DF8055 /* Lottie in Frameworks */,
 				D2D2A1A8291D49A8001EC7F9 /* CombineCocoa in Frameworks */,
-				D2D2A1A3291D45FC001EC7F9 /* FirebaseStorage in Frameworks */,
+				D2030A01291F7D9400DF8055 /* FirebaseStorage in Frameworks */,
+				D20309FD291F7D9400DF8055 /* FirebaseDynamicLinks in Frameworks */,
+				D20309FF291F7D9400DF8055 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D2030A02291F7EF800DF8055 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D2D2A16E291D43C2001EC7F9 = {
 			isa = PBXGroup;
 			children = (
 				D2D2A179291D43C2001EC7F9 /* PuzzlePic */,
 				D2D2A178291D43C2001EC7F9 /* Products */,
+				D2030A02291F7EF800DF8055 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,6 +181,8 @@
 		D2D2A190291D443D001EC7F9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D20309F8291F7B8E00DF8055 /* Fail_Animation.json */,
+				D20309F7291F7B8E00DF8055 /* Success_Animation.json */,
 				D2D2A1B9291D4F7A001EC7F9 /* SearchCollectionViewCell.swift */,
 				D2D2A1CF291D6F2F001EC7F9 /* PhotoTemplateCollectionViewCell.swift */,
 				D2D2A1D1291D6FEE001EC7F9 /* PhotoCollectionViewCell.swift */,
@@ -216,6 +234,7 @@
 				D2D2A199291D44FE001EC7F9 /* PhotoRoomViewController.swift */,
 				D2D2A1B7291D4BD8001EC7F9 /* SettingViewController.swift */,
 				D2D2A1CE291D6E87001EC7F9 /* PhotoTemplate */,
+				D2DEF4C2291F6EEC00D6E5B8 /* PasswordViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -259,10 +278,11 @@
 			);
 			name = PuzzlePic;
 			packageProductDependencies = (
-				D2D2A19E291D45FC001EC7F9 /* FirebaseDynamicLinks */,
-				D2D2A1A0291D45FC001EC7F9 /* FirebaseFirestore */,
-				D2D2A1A2291D45FC001EC7F9 /* FirebaseStorage */,
 				D2D2A1A7291D49A8001EC7F9 /* CombineCocoa */,
+				D20309FC291F7D9400DF8055 /* FirebaseDynamicLinks */,
+				D20309FE291F7D9400DF8055 /* FirebaseFirestore */,
+				D2030A00291F7D9400DF8055 /* FirebaseStorage */,
+				D2030A03291F7EF800DF8055 /* Lottie */,
 			);
 			productName = PuzzlePic;
 			productReference = D2D2A177291D43C2001EC7F9 /* PuzzlePic.app */;
@@ -293,8 +313,9 @@
 			);
 			mainGroup = D2D2A16E291D43C2001EC7F9;
 			packageReferences = (
-				D2D2A19D291D45FC001EC7F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				D2D2A1A6291D49A8001EC7F9 /* XCRemoteSwiftPackageReference "CombineCocoa" */,
+				D20309F6291F7B6100DF8055 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				D20309FB291F7D9400DF8055 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = D2D2A178291D43C2001EC7F9 /* Products */;
 			projectDirPath = "";
@@ -312,6 +333,8 @@
 			files = (
 				D2D2A187291D43C3001EC7F9 /* LaunchScreen.storyboard in Resources */,
 				D2D2A184291D43C3001EC7F9 /* Assets.xcassets in Resources */,
+				D20309F9291F7B8E00DF8055 /* Success_Animation.json in Resources */,
+				D20309FA291F7B8E00DF8055 /* Fail_Animation.json in Resources */,
 				D2D2A1A5291D4827001EC7F9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,6 +360,7 @@
 				D2D2A1F1291E72D7001EC7F9 /* String+Extensions.swift in Sources */,
 				D2D2A1C4291D67FB001EC7F9 /* PhotoViewModel.swift in Sources */,
 				D2D2A1ED291E6948001EC7F9 /* Decodable+Extensions.swift in Sources */,
+				D2DEF4C3291F6EEC00D6E5B8 /* PasswordViewController.swift in Sources */,
 				D2D2A1D4291D7015001EC7F9 /* DynamicLinkManager.swift in Sources */,
 				D2D2A1CA291D6E00001EC7F9 /* PhotoGridSelectViewController.swift in Sources */,
 				D2D2A1EF291E723E001EC7F9 /* DateFormatter+Extensions.swift in Sources */,
@@ -570,7 +594,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D2D2A19D291D45FC001EC7F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		D20309F6291F7B6100DF8055 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		D20309FB291F7D9400DF8055 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk#swift-package-manager";
 			requirement = {
@@ -589,20 +621,25 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D2D2A19E291D45FC001EC7F9 /* FirebaseDynamicLinks */ = {
+		D20309FC291F7D9400DF8055 /* FirebaseDynamicLinks */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D2D2A19D291D45FC001EC7F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D20309FB291F7D9400DF8055 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDynamicLinks;
 		};
-		D2D2A1A0291D45FC001EC7F9 /* FirebaseFirestore */ = {
+		D20309FE291F7D9400DF8055 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D2D2A19D291D45FC001EC7F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D20309FB291F7D9400DF8055 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		D2D2A1A2291D45FC001EC7F9 /* FirebaseStorage */ = {
+		D2030A00291F7D9400DF8055 /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D2D2A19D291D45FC001EC7F9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = D20309FB291F7D9400DF8055 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		D2030A03291F7EF800DF8055 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D20309F6291F7B6100DF8055 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		D2D2A1A7291D49A8001EC7F9 /* CombineCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
