@@ -9,12 +9,11 @@ import Foundation
 import FirebaseFirestore
 import Combine
 
-class FirestoreManager {
-    static let shared = FirestoreManager()
+class PhotoRoomsSearchDataManager {
     private let database = Firestore.firestore()
-    let allPhotoRooms: CurrentValueSubject<[PhotoRoomModel], Never> = .init([])
-    let userPhotoRooms: CurrentValueSubject<[PhotoRoomModel], Never> = .init([])
-    private let photoCollectionPath = "photo_collection_path"
+    let allPhotoRoomSearchs: CurrentValueSubject<[PhotoRoomSearchModel], Never> = .init([])
+    let userPhotoRoomSearchs: CurrentValueSubject<[PhotoRoomSearchModel], Never> = .init([])
+    private let photoRoomSearchCollectionPath = "photo_room_search_path"
     private var cancellables = Set<AnyCancellable>()
     private var observer: ListenerRegistration?
     
@@ -32,35 +31,35 @@ class FirestoreManager {
     func set(photoRoomModel: PhotoRoomModel) {
         guard let documentData = photoRoomModel.dictionary else { return }
         database
-            .collection(photoCollectionPath)
+            .collection(photoRoomSearchCollectionPath)
             .document(photoRoomModel.photoRoomId)
             .setData(documentData, merge: true)
     }
     
     func delete(photoRoomModel: PhotoRoomModel) {
         database
-            .collection(photoCollectionPath)
+            .collection(photoRoomSearchCollectionPath)
             .document(photoRoomModel.photoRoomId)
             .delete()
     }
     
     private func addObserver() {
         observer = database
-            .collection(photoCollectionPath)
+            .collection(photoRoomSearchCollectionPath)
             .addSnapshotListener { [weak self] snapshot, error in
                 guard
                     let documents = snapshot?.documents,
                     error == nil else { return }
-                let allPhotoRooms = documents
+                let allPhotoRoomSearchs = documents
                     .map({ $0.data() })
-                    .compactMap { data -> PhotoRoomModel? in
-                        if let photoRoomModel: PhotoRoomModel = try? PhotoRoomModel.decode(dictionary: data) {
-                            return photoRoomModel
+                    .compactMap { data -> PhotoRoomSearchModel? in
+                        if let photoRoomSearchModel: PhotoRoomSearchModel = try? PhotoRoomSearchModel.decode(dictionary: data) {
+                            return photoRoomSearchModel
                         } else {
                             return nil
                         }
                     }
-                self?.allPhotoRooms.send(allPhotoRooms)
+                self?.allPhotoRoomSearchs.send(allPhotoRoomSearchs)
             }
     }
     
@@ -69,21 +68,21 @@ class FirestoreManager {
     }
     
     private func bind() {
-        allPhotoRooms
+        allPhotoRoomSearchs
             .map(filterUsersPhotoRooms)
             .sink { [weak self] rooms in
-                self?.userPhotoRooms.send(rooms)
+                self?.userPhotoRoomSearchs.send(rooms)
             }
             .store(in: &cancellables)
     }
     
-    private func filterAndSortPhotoRooms(rooms: [PhotoRoomModel]) -> [PhotoRoomModel] {
+    private func filterAndSortPhotoRooms(rooms: [PhotoRoomSearchModel]) -> [PhotoRoomSearchModel] {
         let filteredRooms = filterUsersPhotoRooms(rooms: rooms)
         let sortedRooms = sortPhotoRooms(rooms: filteredRooms)
         return sortedRooms
     }
     
-    private func sortPhotoRooms(rooms: [PhotoRoomModel]) -> [PhotoRoomModel] {
+    private func sortPhotoRooms(rooms: [PhotoRoomSearchModel]) -> [PhotoRoomSearchModel] {
         return rooms.sorted { first, second in
             guard
                 let firstDate = first.createdDate.asDate,
@@ -92,7 +91,7 @@ class FirestoreManager {
         }
     }
     
-    private func filterUsersPhotoRooms(rooms: [PhotoRoomModel]) -> [PhotoRoomModel] {
+    private func filterUsersPhotoRooms(rooms: [PhotoRoomSearchModel]) -> [PhotoRoomSearchModel] {
         let userId = UserDefaultsManager.userId
         return rooms.filter({$0.joinedUserIds.contains(userId)})
     }

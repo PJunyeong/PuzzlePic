@@ -10,13 +10,17 @@ import Combine
 import UIKit
 
 class PhotoHistoryViewModel {
-    let userPhotoRooms: CurrentValueSubject<[PhotoRoomModel], Never> = .init([])
-    private let dataService = FirestoreManager.shared
-    private var dataSource: UICollectionViewDiffableDataSource<PhotoHistoryCollectionViewSection, PhotoRoomModel>!
+    let userPhotoRooms: CurrentValueSubject<[PhotoRoomSearchModel], Never> = .init([])
+    let dataService: PhotoRoomsSearchDataManager
+    private var dataSource: UICollectionViewDiffableDataSource<PhotoHistoryCollectionViewSection, PhotoRoomSearchModel>!
     private var cancellables = Set<AnyCancellable>()
     
-    private func updateDateSource(items: [PhotoRoomModel]) {
-        var snapshot = NSDiffableDataSourceSnapshot<PhotoHistoryCollectionViewSection, PhotoRoomModel>()
+    init(dataService: PhotoRoomsSearchDataManager) {
+        self.dataService = dataService
+    }
+    
+    private func updateDateSource(items: [PhotoRoomSearchModel]) {
+        var snapshot = NSDiffableDataSourceSnapshot<PhotoHistoryCollectionViewSection, PhotoRoomSearchModel>()
         snapshot.appendSections(PhotoHistoryCollectionViewSection.allCases)
         snapshot.appendItems(items)
         dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
@@ -31,7 +35,7 @@ class PhotoHistoryViewModel {
             return cell
         })
         dataService
-            .userPhotoRooms
+            .userPhotoRoomSearchs
             .sink { [weak self] rooms in
                 self?.userPhotoRooms.send(rooms)
             }
@@ -41,6 +45,5 @@ class PhotoHistoryViewModel {
                 self?.updateDateSource(items: items)
             }
             .store(in: &cancellables)
-        
     }
 }

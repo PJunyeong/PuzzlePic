@@ -38,12 +38,21 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         collectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.identifier)
         return collectionView
     }()
-    private let viewModel = SearchViewModel()
+    private let viewModel: SearchViewModel
     private let failAnimationView: LottieAnimationView = .init(name: "Fail_Animation")
     private let successAnimationView: LottieAnimationView = .init(name: "Success_Animation")
     private var cancellables = Set<AnyCancellable>()
     private let input: PassthroughSubject<PasswordViewController.Input, Never> = .init()
-
+    
+    init(dataService: PhotoRoomsSearchDataManager) {
+        self.viewModel = SearchViewModel(dataService: dataService)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -55,9 +64,10 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         collectionView.frame = view.bounds
         noSearchResultsView.frame = view.bounds
         noSearchResultsView.center = view.center
-        successAnimationView.frame = view.bounds
+        let size = view.frame.width / 3
+        successAnimationView.frame = CGRect(x: 0, y: 0, width: size, height: size)
         successAnimationView.center = view.center
-        failAnimationView.frame = view.bounds
+        failAnimationView.frame = CGRect(x: 0, y: 0, width: size, height: size)
         failAnimationView.center = view.center
     }
     
@@ -105,7 +115,7 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
     private func bind() {
         viewModel.bind(collectionView: collectionView)
         viewModel
-            .allPhotoRooms
+            .allPhotoRoomSearchs
             .receive(on: DispatchQueue.main)
             .sink { [weak self] rooms in
                 self?.toggleNoSearchResultsView(isHidden: !rooms.isEmpty)
@@ -121,7 +131,7 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
             .store(in: &cancellables)
     }
     
-    private func presentPhotoRoomView(model: PhotoRoomModel) {
+    private func presentPhotoRoomView(model: PhotoRoomSearchModel) {
         let vc = PhotoRoomViewController(model: model)
         let navVC = UINavigationController(rootViewController: vc)
         vc.title = model.title
@@ -129,7 +139,7 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
         present(navVC, animated: true)
     }
     
-    private func presentPasswordView(model: PhotoRoomModel) {
+    private func presentPasswordView(model: PhotoRoomSearchModel) {
         let vc = PasswordViewController(model: model)
         vc.delegate = self
         vc.bind(input: input.eraseToAnyPublisher())
@@ -149,7 +159,7 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
 }
 
 extension SearchViewController: PasswordViewControllerDelegate {
-    func passwordDidEntered(_ password: String, _ model: PhotoRoomModel) {
+    func passwordDidEntered(_ password: String, _ model: PhotoRoomSearchModel) {
         print("password: \(model.password)")
         if password == model.password {
             successAnimationView.isHidden = false
@@ -193,7 +203,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let model = viewModel.allPhotoRooms.value[indexPath.row]
+        let model = viewModel.allPhotoRoomSearchs.value[indexPath.row]
         presentPasswordView(model: model)
     }
 }

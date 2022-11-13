@@ -62,7 +62,7 @@ class PhotoHistoryCollectionViewCell: UICollectionViewCell {
         joinedLabel.text = nil
     }
     
-    func configure(with model: PhotoRoomModel) {
+    func configure(with model: PhotoRoomSearchModel) {
         titleLabel.text = model.title
     }
 }

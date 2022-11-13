@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 protocol PasswordViewControllerDelegate: AnyObject {
-    func passwordDidEntered(_ password: String, _ model: PhotoRoomModel)
+    func passwordDidEntered(_ password: String, _ model: PhotoRoomSearchModel)
 }
 
 class PasswordViewController: UIViewController {
@@ -17,10 +17,10 @@ class PasswordViewController: UIViewController {
         case passwordDidVerified(isPassed: Bool)
     }
     weak var delegate: PasswordViewControllerDelegate?
-    let model: PhotoRoomModel
+    let model: PhotoRoomSearchModel
     private var cancellables = Set<AnyCancellable>()
     
-    init(model: PhotoRoomModel) {
+    init(model: PhotoRoomSearchModel) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
     }

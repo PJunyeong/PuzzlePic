@@ -18,8 +18,17 @@ class PhotoHistoryViewController: UIViewController {
         collectionView.register(PhotoHistoryCollectionViewCell.self, forCellWithReuseIdentifier: PhotoHistoryCollectionViewCell.identifier)
         return collectionView
     }()
-    private let viewModel = PhotoHistoryViewModel()
-
+    private let viewModel: PhotoHistoryViewModel
+    
+    init(dataService: PhotoRoomsSearchDataManager) {
+        self.viewModel = PhotoHistoryViewModel(dataService: dataService)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -57,7 +66,7 @@ class PhotoHistoryViewController: UIViewController {
     }
     
     @objc private func searchButtonDidTap() {
-        let searchVC = SearchViewController()
+        let searchVC = SearchViewController(dataService: viewModel.dataService)
         navigationController?.pushViewController(searchVC, animated: false)
     }
     

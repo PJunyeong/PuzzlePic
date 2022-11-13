@@ -20,6 +20,7 @@ struct PhotoRoomModel: Hashable, Codable {
     let photoTemplate: String
     let sideCount: Int
     var photoModels: [PhotoModel]
+    var lastUpdatedDate: String
     var joinedUserIds: [String]
     func hash(into hasher: inout Hasher) {
         hasher.combine(photoRoomId)

@@ -14,7 +14,7 @@
         <attribute name="joinedUserIds" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="linkURLString" optional="YES" attributeType="String"/>
         <attribute name="password" optional="YES" attributeType="String"/>
-        <attribute name="photoModels" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[PhotoEntity]"/>
+        <attribute name="photoIds" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="photoRoomCompletedThumbnailURL" optional="YES" attributeType="String"/>
         <attribute name="photoRoomId" optional="YES" attributeType="String"/>
         <attribute name="photoRoomThumbnailURLString" optional="YES" attributeType="String"/>

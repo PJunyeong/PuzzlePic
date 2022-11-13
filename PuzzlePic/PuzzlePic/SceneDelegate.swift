@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.theme.accent]
         let window = UIWindow(windowScene: scene)
         window.makeKeyAndVisible()
-        window.rootViewController = UINavigationController(rootViewController: PhotoHistoryViewController())
+        window.rootViewController = UINavigationController(rootViewController: PhotoHistoryViewController(dataService: PhotoRoomsSearchDataManager()))
         self.window = window
     }
 

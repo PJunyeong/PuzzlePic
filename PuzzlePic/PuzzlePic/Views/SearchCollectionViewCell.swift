@@ -58,7 +58,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     
-    func configure(with model: PhotoRoomModel) {
+    func configure(with model: PhotoRoomSearchModel) {
         titleLabel.text = model.title
         imageView.image = UIImage(systemName: "person.circle")
     }

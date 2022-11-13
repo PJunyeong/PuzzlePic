@@ -10,10 +10,18 @@ import Combine
 import CombineCocoa
 
 class PhotoRoomViewController: UIViewController, UIGestureRecognizerDelegate {
-    private let viewModel: PhotoViewModel
+    private var viewModel: PhotoRoomViewModel?
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 1
+        layout.minimumInteritemSpacing = 1
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
+        return collectionView
+    }()
 
-    init(model: PhotoRoomModel) {
-        self.viewModel = PhotoViewModel(model: model)
+    init(model: PhotoRoomSearchModel) {
+        self.viewModel = PhotoRoomViewModel()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,9 +34,17 @@ class PhotoRoomViewController: UIViewController, UIGestureRecognizerDelegate {
         setUI()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionView.frame = view.bounds
+    }
+    
     private func setUI() {
         view.backgroundColor = .systemBackground
+        view.addSubview(collectionView)
+        collectionView.delegate = self
         setNavigationBar()
+//        viewModel?.bind(collectionView: collectionView)
     }
     
     private func setNavigationBar() {
@@ -43,5 +59,18 @@ class PhotoRoomViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @objc private func dismissToSearchView() {
         dismiss(animated: true)
+    }
+}
+
+extension PhotoRoomViewController: UICollectionViewDelegate {
+    
+}
+
+extension PhotoRoomViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let sideCount = 1
+        
+        let size = (Int(view.frame.width) - sideCount - 1) / sideCount
+        return CGSize(width: size, height: size)
     }
 }
