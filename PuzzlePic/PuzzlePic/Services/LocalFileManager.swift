@@ -70,6 +70,7 @@ class LocalFileManager {
                     let data = try Data(contentsOf: url)
                     promise(.success(data))
                 } catch {
+                    print(error.localizedDescription)
                     promise(.failure(error))
                 }
             }

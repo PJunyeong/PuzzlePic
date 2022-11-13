@@ -12,11 +12,11 @@ import UIKit
 class SearchViewModel {
     let allPhotoRoomSearchs: CurrentValueSubject<[PhotoRoomSearchModel], Never> = .init([])
     let searchText: CurrentValueSubject<String, Never> = .init("")
-    private let dataService: PhotoRoomsSearchDataManager
+    let dataService: PhotoRoomsDataManager
     private var dataSource: UICollectionViewDiffableDataSource<SearchCollectionViewSection, PhotoRoomSearchModel>!
     private var cancellables = Set<AnyCancellable>()
     
-    init(dataService: PhotoRoomsSearchDataManager) {
+    init(dataService: PhotoRoomsDataManager) {
         self.dataService = dataService
     }
     
@@ -67,13 +67,18 @@ class SearchViewModel {
         }
     }
 
-//    private func addMockData() {
-//        var datas = [PhotoRoomModel]()
-//        let userId = UserDefaultsManager.userId
-//        for x in 0..<10 {
-//            let title = "mock data_\(x)"
-//            let data = PhotoRoomModel(title: title, createdUserId: userId, password: "password_\(x)", createdDate: Date().asString, photoTemplate: "", sideCount: 3, photoIds: [], joinedUserIds: [userId])
-//            dataService.set(photoRoomModel: data)
-//        }
-//    }
+    private func addMockData() {
+        let userId = UserDefaultsManager.userId
+        let dateString = Date().asString
+        let url = URL(string: "https://png.pngitem.com/pimgs/s/46-468761_pikachu-png-transparent-image-pikachu-png-png-download.png")
+        for x in 0..<5 {
+            let title = "mock data_\(x)"
+            var roomModel = PhotoRoomModel(title: title, createdUserId: userId, password: "password_\(x)", createdDate: dateString, photoTemplate: "", sideCount: 3, photoModels: [], lastUpdatedDate: dateString, joinedUserIds: [userId])
+            let photoModel = PhotoModel(photoRoomId: roomModel.photoRoomId, photoURL: url, row: 0, column: 0, sideCount: 3, createdUserId: userId, rotatation: 0, isMirrored: false, isValid: true)
+            roomModel.photoModels = [photoModel]
+            let roomSearchModel = PhotoRoomSearchModel(photoRoomId: roomModel.photoRoomId, title: roomModel.title, createdUserId: roomModel.createdUserId, password: roomModel.password, isCompleted: roomModel.isCompleted, createdDate: roomModel.createdUserId, joinedUserIds: roomModel.joinedUserIds, sideCount: roomModel.sideCount)
+            dataService.set(photoRoomModel: roomModel)
+            dataService.set(photoRoomSearchModel: roomSearchModel)
+        }
+    }
 }

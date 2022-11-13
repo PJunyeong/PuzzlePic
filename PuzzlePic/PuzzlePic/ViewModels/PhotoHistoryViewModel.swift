@@ -11,11 +11,11 @@ import UIKit
 
 class PhotoHistoryViewModel {
     let userPhotoRooms: CurrentValueSubject<[PhotoRoomSearchModel], Never> = .init([])
-    let dataService: PhotoRoomsSearchDataManager
+    let dataService: PhotoRoomsDataManager
     private var dataSource: UICollectionViewDiffableDataSource<PhotoHistoryCollectionViewSection, PhotoRoomSearchModel>!
     private var cancellables = Set<AnyCancellable>()
     
-    init(dataService: PhotoRoomsSearchDataManager) {
+    init(dataService: PhotoRoomsDataManager) {
         self.dataService = dataService
     }
     

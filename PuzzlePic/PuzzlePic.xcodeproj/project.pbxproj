@@ -13,9 +13,7 @@
 		D20309FF291F7D9400DF8055 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D20309FE291F7D9400DF8055 /* FirebaseFirestore */; };
 		D2030A01291F7D9400DF8055 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D2030A00291F7D9400DF8055 /* FirebaseStorage */; };
 		D2030A04291F7EF800DF8055 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D2030A03291F7EF800DF8055 /* Lottie */; };
-		D2D016F0291FB47C0071F3DC /* PhotoModelDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D016EF291FB47C0071F3DC /* PhotoModelDataManager.swift */; };
 		D2D016F4291FBAC90071F3DC /* PhotoRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D016F3291FBAC90071F3DC /* PhotoRoomViewModel.swift */; };
-		D2D016FC291FC4EE0071F3DC /* PhotoRoomDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D016FB291FC4EE0071F3DC /* PhotoRoomDataManager.swift */; };
 		D2D016FE2921372E0071F3DC /* PhotoRoomSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D016FD2921372E0071F3DC /* PhotoRoomSearchModel.swift */; };
 		D2D2A17B291D43C2001EC7F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A17A291D43C2001EC7F9 /* AppDelegate.swift */; };
 		D2D2A17D291D43C2001EC7F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A17C291D43C2001EC7F9 /* SceneDelegate.swift */; };
@@ -28,7 +26,7 @@
 		D2D2A1A8291D49A8001EC7F9 /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = D2D2A1A7291D49A8001EC7F9 /* CombineCocoa */; };
 		D2D2A1AA291D49DC001EC7F9 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1A9291D49DC001EC7F9 /* PhotoModel.swift */; };
 		D2D2A1AC291D4A5A001EC7F9 /* PhotoRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1AB291D4A5A001EC7F9 /* PhotoRoomModel.swift */; };
-		D2D2A1B0291D4B81001EC7F9 /* PhotoRoomsSearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1AF291D4B81001EC7F9 /* PhotoRoomsSearchDataManager.swift */; };
+		D2D2A1B0291D4B81001EC7F9 /* PhotoRoomsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1AF291D4B81001EC7F9 /* PhotoRoomsDataManager.swift */; };
 		D2D2A1B2291D4B86001EC7F9 /* NSCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1B1291D4B86001EC7F9 /* NSCacheManager.swift */; };
 		D2D2A1B6291D4BB7001EC7F9 /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1B5291D4BB7001EC7F9 /* LocalFileManager.swift */; };
 		D2D2A1B8291D4BD8001EC7F9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2A1B7291D4BD8001EC7F9 /* SettingViewController.swift */; };
@@ -56,9 +54,7 @@
 /* Begin PBXFileReference section */
 		D20309F7291F7B8E00DF8055 /* Success_Animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Success_Animation.json; sourceTree = "<group>"; };
 		D20309F8291F7B8E00DF8055 /* Fail_Animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Fail_Animation.json; sourceTree = "<group>"; };
-		D2D016EF291FB47C0071F3DC /* PhotoModelDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModelDataManager.swift; sourceTree = "<group>"; };
 		D2D016F3291FBAC90071F3DC /* PhotoRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRoomViewModel.swift; sourceTree = "<group>"; };
-		D2D016FB291FC4EE0071F3DC /* PhotoRoomDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRoomDataManager.swift; sourceTree = "<group>"; };
 		D2D016FD2921372E0071F3DC /* PhotoRoomSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRoomSearchModel.swift; sourceTree = "<group>"; };
 		D2D2A177291D43C2001EC7F9 /* PuzzlePic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuzzlePic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D2A17A291D43C2001EC7F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,7 +68,7 @@
 		D2D2A1A4291D4827001EC7F9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D2D2A1A9291D49DC001EC7F9 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		D2D2A1AB291D4A5A001EC7F9 /* PhotoRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRoomModel.swift; sourceTree = "<group>"; };
-		D2D2A1AF291D4B81001EC7F9 /* PhotoRoomsSearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRoomsSearchDataManager.swift; sourceTree = "<group>"; };
+		D2D2A1AF291D4B81001EC7F9 /* PhotoRoomsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRoomsDataManager.swift; sourceTree = "<group>"; };
 		D2D2A1B1291D4B86001EC7F9 /* NSCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSCacheManager.swift; sourceTree = "<group>"; };
 		D2D2A1B5291D4BB7001EC7F9 /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
 		D2D2A1B7291D4BD8001EC7F9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -160,9 +156,7 @@
 		D2D2A18E291D4433001EC7F9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D2D2A1AF291D4B81001EC7F9 /* PhotoRoomsSearchDataManager.swift */,
-				D2D016FB291FC4EE0071F3DC /* PhotoRoomDataManager.swift */,
-				D2D016EF291FB47C0071F3DC /* PhotoModelDataManager.swift */,
+				D2D2A1AF291D4B81001EC7F9 /* PhotoRoomsDataManager.swift */,
 				D2D2A1B1291D4B86001EC7F9 /* NSCacheManager.swift */,
 				D2D2A1B5291D4BB7001EC7F9 /* LocalFileManager.swift */,
 				D2D2A1DE291E0BD2001EC7F9 /* StorageManager.swift */,
@@ -351,12 +345,10 @@
 			files = (
 				D2D2A19C291D451B001EC7F9 /* PhotoHistoryViewController.swift in Sources */,
 				D2D2A1C6291D6B45001EC7F9 /* NetwokringManager.swift in Sources */,
-				D2D016F0291FB47C0071F3DC /* PhotoModelDataManager.swift in Sources */,
 				D2D2A1D9291DD9C1001EC7F9 /* Color+Extensions.swift in Sources */,
 				D2D2A1AC291D4A5A001EC7F9 /* PhotoRoomModel.swift in Sources */,
 				D2D2A17B291D43C2001EC7F9 /* AppDelegate.swift in Sources */,
 				D2D016F4291FBAC90071F3DC /* PhotoRoomViewModel.swift in Sources */,
-				D2D016FC291FC4EE0071F3DC /* PhotoRoomDataManager.swift in Sources */,
 				D2D2A195291D44B4001EC7F9 /* SearchViewController.swift in Sources */,
 				D2D2A1D2291D6FEE001EC7F9 /* PhotoCollectionViewCell.swift in Sources */,
 				D2D2A1B8291D4BD8001EC7F9 /* SettingViewController.swift in Sources */,
@@ -378,7 +370,7 @@
 				D2D2A19A291D44FE001EC7F9 /* PhotoRoomViewController.swift in Sources */,
 				D2D2A1DF291E0BD2001EC7F9 /* StorageManager.swift in Sources */,
 				D2D2A1EB291E693B001EC7F9 /* Encodable+Extensions.swift in Sources */,
-				D2D2A1B0291D4B81001EC7F9 /* PhotoRoomsSearchDataManager.swift in Sources */,
+				D2D2A1B0291D4B81001EC7F9 /* PhotoRoomsDataManager.swift in Sources */,
 				D2D2A1BC291D5144001EC7F9 /* SearchViewModel.swift in Sources */,
 				D2D2A1B2291D4B86001EC7F9 /* NSCacheManager.swift in Sources */,
 				D2D2A1F5291E9898001EC7F9 /* PhotoHistoryViewModel.swift in Sources */,

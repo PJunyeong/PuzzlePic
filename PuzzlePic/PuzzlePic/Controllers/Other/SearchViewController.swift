@@ -44,7 +44,7 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
     private var cancellables = Set<AnyCancellable>()
     private let input: PassthroughSubject<PasswordViewController.Input, Never> = .init()
     
-    init(dataService: PhotoRoomsSearchDataManager) {
+    init(dataService: PhotoRoomsDataManager) {
         self.viewModel = SearchViewModel(dataService: dataService)
         super.init(nibName: nil, bundle: nil)
     }
@@ -132,7 +132,7 @@ class SearchViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func presentPhotoRoomView(model: PhotoRoomSearchModel) {
-        let vc = PhotoRoomViewController(model: model)
+        let vc = PhotoRoomViewController(model: model, dataService: viewModel.dataService)
         let navVC = UINavigationController(rootViewController: vc)
         vc.title = model.title
         navVC.modalPresentationStyle = .fullScreen

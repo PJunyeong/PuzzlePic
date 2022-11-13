@@ -10,7 +10,7 @@ import Combine
 import CombineCocoa
 
 class PhotoRoomViewController: UIViewController, UIGestureRecognizerDelegate {
-    private var viewModel: PhotoRoomViewModel?
+    private let viewModel: PhotoRoomViewModel
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 1
@@ -20,8 +20,8 @@ class PhotoRoomViewController: UIViewController, UIGestureRecognizerDelegate {
         return collectionView
     }()
 
-    init(model: PhotoRoomSearchModel) {
-        self.viewModel = PhotoRoomViewModel()
+    init(model: PhotoRoomSearchModel, dataService: PhotoRoomsDataManager) {
+        self.viewModel = PhotoRoomViewModel(model: model, dataService: dataService)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,7 +44,7 @@ class PhotoRoomViewController: UIViewController, UIGestureRecognizerDelegate {
         view.addSubview(collectionView)
         collectionView.delegate = self
         setNavigationBar()
-//        viewModel?.bind(collectionView: collectionView)
+        viewModel.bind(collectionView: collectionView)
     }
     
     private func setNavigationBar() {
@@ -68,7 +68,7 @@ extension PhotoRoomViewController: UICollectionViewDelegate {
 
 extension PhotoRoomViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let sideCount = 1
+        let sideCount = viewModel.model.sideCount
         
         let size = (Int(view.frame.width) - sideCount - 1) / sideCount
         return CGSize(width: size, height: size)

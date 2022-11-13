@@ -16,6 +16,7 @@ struct PhotoRoomSearchModel: Hashable, Codable {
     var isCompleted: Bool
     let createdDate: String
     var joinedUserIds: [String]
+    let sideCount: Int
     func hash(into hasher: inout Hasher) {
         hasher.combine(photoRoomId)
     }

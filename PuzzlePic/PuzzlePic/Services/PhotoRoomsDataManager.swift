@@ -9,42 +9,76 @@ import Foundation
 import FirebaseFirestore
 import Combine
 
-class PhotoRoomsSearchDataManager {
+class PhotoRoomsDataManager {
     private let database = Firestore.firestore()
     let allPhotoRoomSearchs: CurrentValueSubject<[PhotoRoomSearchModel], Never> = .init([])
     let userPhotoRoomSearchs: CurrentValueSubject<[PhotoRoomSearchModel], Never> = .init([])
+    var photoRoom: CurrentValueSubject<PhotoRoomModel?, Never> = .init(nil)
     private let photoRoomSearchCollectionPath = "photo_room_search_path"
+    private let photoRoomCollectionPath = "photo_room_path"
     private var cancellables = Set<AnyCancellable>()
-    private var observer: ListenerRegistration?
+    private var searchObserver: ListenerRegistration?
+    private var roomObserver: ListenerRegistration?
     
     init() {
         DispatchQueue.global(qos: .default).async { [weak self] in
-            self?.addObserver()
+            self?.addSearchObserver()
             self?.bind()
         }
     }
     
     deinit {
-        removeObserver()
+        removeObservers()
     }
     
     func set(photoRoomModel: PhotoRoomModel) {
         guard let documentData = photoRoomModel.dictionary else { return }
         database
-            .collection(photoRoomSearchCollectionPath)
+            .collection(photoRoomCollectionPath)
             .document(photoRoomModel.photoRoomId)
+            .setData(documentData, merge: true)
+    }
+    
+    func set(photoRoomSearchModel: PhotoRoomSearchModel) {
+        guard let documentData = photoRoomSearchModel.dictionary else { return }
+        database
+            .collection(photoRoomSearchCollectionPath)
+            .document(photoRoomSearchModel.photoRoomId)
             .setData(documentData, merge: true)
     }
     
     func delete(photoRoomModel: PhotoRoomModel) {
         database
-            .collection(photoRoomSearchCollectionPath)
+            .collection(photoRoomCollectionPath)
             .document(photoRoomModel.photoRoomId)
             .delete()
     }
     
-    private func addObserver() {
-        observer = database
+    func delete(photoRoomSearchModel: PhotoRoomSearchModel) {
+        database
+            .collection(photoRoomSearchCollectionPath)
+            .document(photoRoomSearchModel.photoRoomId)
+            .delete()
+    }
+    
+    func addRoomObserver(model: PhotoRoomSearchModel) {
+        photoRoom = .init(nil)
+        roomObserver = database
+            .collection(photoRoomCollectionPath)
+            .document(model.photoRoomId)
+            .addSnapshotListener({ [weak self] snapshot, error in
+                if
+                    let document = snapshot?.data(),
+                    let room: PhotoRoomModel = try? PhotoRoomModel.decode(dictionary: document) {
+                    self?.photoRoom.send(room)
+                } else {
+                    self?.photoRoom.send(nil)
+                }
+            })
+    }
+    
+    private func addSearchObserver() {
+        searchObserver = database
             .collection(photoRoomSearchCollectionPath)
             .addSnapshotListener { [weak self] snapshot, error in
                 guard
@@ -63,8 +97,18 @@ class PhotoRoomsSearchDataManager {
             }
     }
     
-    private func removeObserver() {
-        observer = nil
+    private func removeObservers() {
+        removeSearchObserver()
+        removeRoomObserver()
+    }
+    
+    func removeRoomObserver() {
+        roomObserver = nil
+        photoRoom.send(completion: .finished)
+    }
+    
+    private func removeSearchObserver() {
+        searchObserver = nil
     }
     
     private func bind() {

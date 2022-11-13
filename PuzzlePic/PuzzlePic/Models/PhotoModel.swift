@@ -17,6 +17,7 @@ struct PhotoModel: Hashable, Codable {
     let createdUserId: String
     var rotatation: Int
     var isMirrored: Bool
+    var isValid: Bool
     func hash(into hasher: inout Hasher) {
         hasher.combine(photoId)
     }

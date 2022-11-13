@@ -20,7 +20,7 @@ class PhotoHistoryViewController: UIViewController {
     }()
     private let viewModel: PhotoHistoryViewModel
     
-    init(dataService: PhotoRoomsSearchDataManager) {
+    init(dataService: PhotoRoomsDataManager) {
         self.viewModel = PhotoHistoryViewModel(dataService: dataService)
         super.init(nibName: nil, bundle: nil)
     }
